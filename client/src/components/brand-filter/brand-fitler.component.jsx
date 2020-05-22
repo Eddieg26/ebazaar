@@ -1,27 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { filterStyles } from '../shared/styles';
 
-import { Paper, FormControlLabel, FormGroup, Checkbox, makeStyles } from '@material-ui/core';
-
-const styles = makeStyles(theme => ({
-    p16: {
-        padding: "16px"
-    },
-    header: {
-        margin: "0px 0px 16px 0px"
-    }
-}));
+import { Paper, FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 
 const BrandFilter = ({ brands, onToggleBrand }) => {
-    const classes = styles();
+    const classes = filterStyles();
     return (
-        <Paper classes={{ root: classes.p16 }} elevation={3}>
+        <Paper classes={{ root: classes.filterBox }} elevation={3}>
             <h3 className={classes.header}>Brands</h3>
             <FormGroup>
                 {brands.map(brand => (
-                    <FormControlLabel
+                    <FormControlLabel key={brand.name}
                         control={
                             <Checkbox
+                                key={brand.name}
                                 checked={brand.toggle}
                                 onChange={() => onToggleBrand(brand)}
                                 name={brand.name}
