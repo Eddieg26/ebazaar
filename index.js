@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const routes = require('./routes/index.route');
+const routes = require('./routes/index.route');
 const cors = require('cors');
 const path = require("path");
 
@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DB_URI, { useUnifiedTopo
 
         app.use(cors());
 
-        // app.use('/api/', routes);
+        app.use('/api/', routes);
 
         app.get("*", (req, res) => {
             res.sendFile(path.join(__dirname, "client", "build", "index.html"));

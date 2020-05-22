@@ -1,0 +1,221 @@
+[
+    {
+        "name": "Sony Audio 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Audio 01",
+        "price": 349,
+        "brandId": 2,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Sony Audio 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Audio 02",
+        "price": 79,
+        "brandId": 2,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Sony Audio 03",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Audio 03",
+        "price": 189,
+        "brandId": 2,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Sony Smartphone 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Smartphone 01",
+        "price": 279,
+        "brandId": 2,
+        "categoryId": 1,
+        "rating": 0
+    },
+
+    {
+        "name": "Sony TV 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony TV 01",
+        "price": 899,
+        "brandId": 2,
+        "categoryId": 3,
+        "rating": 0
+    },
+
+    {
+        "name": "Sony TV 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony TV 02",
+        "price": 699,
+        "brandId": 2,
+        "categoryId": 3,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung Audio 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Audio 01",
+        "price": 149,
+        "brandId": 1,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung Audio 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Sony Audio 02",
+        "price": 349,
+        "brandId": 1,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung Smartphone 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung Smartphone 01",
+        "price": 749,
+        "brandId": 1,
+        "categoryId": 1,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung Smartphone 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung Smartphone 02",
+        "price": 849,
+        "brandId": 1,
+        "categoryId": 1,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung Accessory 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung Accessory 01",
+        "price": 14,
+        "brandId": 1,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung TV 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung TV 01",
+        "price": 529,
+        "brandId": 1,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung TV 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung TV 02",
+        "price": 129,
+        "brandId": 1,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Samsung TV 03",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Samsung TV 03",
+        "price": 359,
+        "brandId": 1,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Audio 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Audio 01",
+        "price": 189,
+        "brandId": 0,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Audio 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Audio 02",
+        "price": 89,
+        "brandId": 0,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Smartphones 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Smartphones 01",
+        "price": 999,
+        "brandId": 0,
+        "categoryId": 1,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Smartphones 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Smartphones 02",
+        "price": 1299,
+        "brandId": 0,
+        "categoryId": 1,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Accessory 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Accessory 01",
+        "price": 29,
+        "brandId": 0,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Apple Accessory 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Accessory 02",
+        "price": 59,
+        "brandId": 0,
+        "categoryId": 2,
+        "rating": 0
+    },
+
+    {
+        "name": "Beats Audio 01",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Audio 01",
+        "price": 349,
+        "brandId": 3,
+        "categoryId": 0,
+        "rating": 0
+    },
+
+    {
+        "name": "Beats Audio 02",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "gallaryUrl": "Apple Audio 02",
+        "price": 259,
+        "brandId": 3,
+        "categoryId": 0,
+        "rating": 0
+    }
+]
