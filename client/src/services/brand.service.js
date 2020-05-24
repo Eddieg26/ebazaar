@@ -1,6 +1,6 @@
 import { getBaseUrl } from '../utils/utils';
 
-export const brandsService = {
+export const brandService = {
     getAll: async function () {
         const url = `${getBaseUrl()}/brands`;
 

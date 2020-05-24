@@ -8,36 +8,35 @@ const getById = async productId => {
 const getByIdMany = async productIds => {
     let arr = productIds.map(id => new mongoose.Types.ObjectId(id));
 
-    return await Product.find().where('_id').in(arr).exec();
+    return await Product.find({ _id: { $in: arr } });
 }
 
 const getAll = async () => {
     return await Product.find({});
 }
 
-const getByFilter = async (filter) => {
-    const { minPrice, maxPrice, brandId, categoryId, rating } = filter;
+const getByFilter = async (filterOptions) => {
+    const { minPrice, rating } = filterOptions;
+    let { maxPrice, categoryIds, brandIds } = filterOptions;
 
-    let filterObject = {};
+    let filter = {};
 
     if (maxPrice !== undefined && maxPrice === 0)
         maxPrice = Number.MAX_SAFE_INTEGER;
 
     if (minPrice !== undefined && maxPrice !== undefined)
-        filterObject.price = { $gte: minPrice, $lte: maxPrice };
-    
-    if (brandId !== undefined)
-        filterObject.brandId = brandId;
-    
-    if (categoryId !== undefined)
-        filterObject.categoryId = categoryId;
-    
+        filter.price = { $gte: minPrice, $lte: maxPrice };
+
+    if (brandIds && brandIds.length > 0)
+        filter.brandId = { $in: brandIds }
+
+    if (categoryIds && categoryIds.length > 0)
+        filter.categoryId = { $in: categoryIds }
+
     if (rating !== undefined)
-        filterObject.rating = { $gte: rating.toFixed(), $lte: rating.rating() + 1 };
-    
-    console.log(filterObject);
-    
-    return await Product.find(filterObject);
+        filter.rating = { $gte: rating.toFixed(), $lte: rating.rating() + 1 };
+
+    return await Product.find(filter);
 }
 
 const create = async (productInfo) => {

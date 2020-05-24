@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BrandSchema = new mongoose.Schema({
+const CategorySchema = new mongoose.Schema({
     _id: {
         type: Number,
         required: true
@@ -11,4 +11,4 @@ const BrandSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Brand', BrandSchema);
+module.exports = mongoose.model('Category', CategorySchema);
