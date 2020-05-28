@@ -41,7 +41,7 @@ export const productCardStyles = makeStyles(theme => ({
         height: "100%",
         backgroundColor: 'rgba(0, 0, 0, 0)',
         opacity: 0,
-        
+
         '&:hover': {
             position: "absolute",
             width: "100%",
@@ -56,5 +56,11 @@ export const productCardStyles = makeStyles(theme => ({
     },
     productTitle: {
         padding: theme.spacing(2)
+    }
+}));
+
+export const headerStyles = makeStyles(theme => ({
+    title: {
+        flexGrow: 1
     }
 }));
