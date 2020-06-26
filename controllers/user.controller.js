@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const User = require('../models/user.model');
+const User = require('../models/User.model');
 
 const genPassword = (password) => {
     const salt = bcrypt.genSaltSync(10);
