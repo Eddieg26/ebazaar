@@ -23,7 +23,9 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.7.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
     "cors": "^2.8.5",
@@ -34,6 +36,7 @@
     "heroku": "^7.41.1",
     "joi": "^14.3.1",
     "mongoose": "^5.9.12",
+    "stripe": "^8.64.0",
     "validator": "^13.0.0"
   }
 }

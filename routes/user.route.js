@@ -6,13 +6,16 @@ const router = express.Router();
 module.exports = router;
 
 const signin = async (req, res) => {
-    const email = req.body.email;
+    const { email, password } = req.body;
     let user = await userController.getByEmail(email);
-    return res.json(user);
+    if (userController.validatePassword(password, user.password)) {
+        return res.json(user)
+    } else
+        return res.json(null);
 }
 
 const signout = async (req, res) => {
-
+    return res.status(200).json({messsage: 'success'});
 }
 
 const signup = async (req, res) => {
@@ -23,13 +26,18 @@ const signup = async (req, res) => {
 
 const update = async (req, res) => {
     let info = req.body;
-    await userController.update(info);
+    let userId = req.params.userId;
+    const result = await userController.update(userId, info);
 
-    const user = await userController.getById(info.id);
-    return res.json(user);
+    if (result) {
+        const user = await userController.getById(userId);
+        return res.json(user);
+    } else {
+        return res.json(null);
+    }
 }
 
 router.route('/signout').get(asynchandler(signout));
 router.route('/signin').post(asynchandler(signin));
 router.route('/signup').post(asynchandler(signup));
-router.route('/update').patch(asynchandler(update));
+router.route('/update/:userId').patch(asynchandler(update));

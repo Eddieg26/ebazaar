@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { productService } from '../../services/product.service';
 import { cartAction } from '../../redux/cart';
+import { productAction } from '../../redux/product';
 
 import { Grid, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
@@ -23,6 +25,7 @@ const ProductsView = ({ filterOptions }) => {
     const [productsPerPage] = useState(12);
 
     let dispatch = useDispatch();
+    let history = useHistory();
 
     const paginate = (event, page) => setCurrentPage(page);
 
@@ -43,12 +46,14 @@ const ProductsView = ({ filterOptions }) => {
 
     }, [products, currentPage])
 
+ 
     const onSelectProduct = product => {
-
+        dispatch(productAction.setCurrentProduct(product));
+        history.push(`/product/${product.name}`);
     }
 
     const onAddProductToCart = product => {
-        dispatch(cartAction.addToCart({ id: product.id }));
+        dispatch(cartAction.addToCart({ ...product, amount: 1 }));
     }
 
     const classes = useStyles();

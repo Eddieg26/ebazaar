@@ -16,12 +16,14 @@ const PriceFilter = ({ min, max, onChangePrice }) => {
     const applyChanges = event => {
         event.preventDefault();
 
-        onChangePrice(price.min, price.max);
+        const minPrice = parseInt(price.min ? price.min : 0);
+        const maxPrice = parseInt(price.max ? price.max : 0);
+
+        onChangePrice(minPrice, maxPrice);
     }
 
     const handleChangePrice = event => {
         const { name, value } = event.target;
-        console.log(event.target);
         setPrice({ ...price, [name]: value });
     }
 

@@ -22,10 +22,6 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DB_URI, { useUnifiedTopo
 
         app.use('/api/', routes);
 
-        app.get("*", (req, res) => {
-            res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-        });
-
         app.listen(process.env.PORT, () => {
             console.log(`listening on port ${process.env.PORT}`);
         });

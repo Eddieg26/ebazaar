@@ -6,7 +6,7 @@ const getById = async productId => {
 }
 
 const getByIdMany = async productIds => {
-    let arr = productIds.map(id => new mongoose.Types.ObjectId(id));
+    let arr = productIds.map(({ id }) => new mongoose.Types.ObjectId(id));
 
     return await Product.find({ _id: { $in: arr } });
 }

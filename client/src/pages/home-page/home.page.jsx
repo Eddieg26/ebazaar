@@ -7,11 +7,14 @@ import PriceFilter from '../../components/price-filter/price-filter.component';
 import CheckboxFilter from '../../components/checkbox-filter/checkbox-filter.component';
 import ProductsView from '../../components/products-view/products-view.component';
 
+import { styles } from './home.styles';
+
 const HomePage = () => {
     const [price, setPrice] = useState({ min: 0, max: 0 });
     const [brands, setBrands] = useState([]);
     const [categories, setCategories] = useState([]);
     const [filterOptions, setFilterOptions] = useState({});
+    const classes = styles();
 
     useEffect(() => {
         const fetchBrands = async () => {
@@ -32,8 +35,8 @@ const HomePage = () => {
 
     useEffect(() => {
         const filterOptions = {
-            minPrice: price.min,
-            maxPrice: price.max,
+            minPrice: price.min * 100,
+            maxPrice: price.max * 100,
             brandIds: brands.filter(brand => (brand.toggle)).map(brand => (brand._id)),
             categoryIds: categories.filter(category => (category.toggle)).map(category => (category._id))
         };
@@ -57,13 +60,13 @@ const HomePage = () => {
     }
 
     return (
-        <div style={{display: "flex", flexDirection: "row"}}>
-            <div style={{ width: "20%", margin: "16px" }}>
+        <div className={classes.main}>
+            <div className={classes.sidebar}>
                 <PriceFilter min={price.min} max={price.max} onChangePrice={handleChangePrice} />
                 <CheckboxFilter title="Brands" items={brands} onToggle={handleToggleBrand} />
                 <CheckboxFilter title="Category" items={categories} onToggle={handleToggleCategory} />
             </div>
-            <div style={{ width: "80%", margin: "16px" }}>
+            <div className={classes.productsView}>
                 <ProductsView filterOptions={filterOptions} />
             </div>
         </div>

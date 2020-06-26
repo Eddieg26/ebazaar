@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user.model');
 
 const genPassword = (password) => {
@@ -20,8 +20,38 @@ const create = async (user) => {
     return await new User(user).save();
 }
 
-const update = async (info) => {
-    return await User.updateOne({ _id: info.id}, { ...info });
+const update = async (id, info) => {
+    const user = await getById(id);
+
+    if (!user) { return false }
+
+    const { oldPassword, newPassword } = info;
+    let updatedInfo = {};
+
+    if (oldPassword && newPassword) {
+        const _newPassword = genPassword(newPassword);
+        
+        console.log(oldPassword);
+        console.log(_newPassword);
+        console.log(user.password);
+
+        if (!validatePassword(oldPassword, _newPassword) && validatePassword(oldPassword, user.password)) {
+            updatedInfo.password = _newPassword;
+        } else {
+            return false;
+        }
+    }
+
+    try {
+        User.updateOne({ _id: id }, updatedInfo);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+const validatePassword = (password, confirmPassword) => {
+    return bcrypt.compareSync(password, confirmPassword);
 }
 
 module.exports = {
@@ -29,5 +59,6 @@ module.exports = {
     getByEmail,
     getById,
     create,
-    update
+    update,
+    validatePassword
 }

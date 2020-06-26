@@ -7,17 +7,11 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         match: [/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please enter a valid email']
     },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
     password: {
         type: String,
-        required: true
+        required: true,
+        minlength: 6,
+        maxlength: 12
     },
     createdAt: {
         type: Date,
