@@ -12,8 +12,6 @@ const app = express();
 mongoose.connect(process.env.MONGODB_URI || process.env.DB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
     .then(client => {
 
-        app.use(express.static(path.join(__dirname, "client", "build")))
-
         app.use(bodyParser.urlencoded({ extended: true }));
 
         app.use(bodyParser.json());

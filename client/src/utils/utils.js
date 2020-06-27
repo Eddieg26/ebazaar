@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 export function getBaseUrl() {
-    return (process.env.NODE_ENV === "development") ? "http://localhost:8001/api" : "";
+    return (process.env.NODE_ENV === "development") ? "http://localhost:8001/api" : "https://ebazaar02.herokuapp.com/";
 }
 
 export function createRequest(requestMethod, data) {
