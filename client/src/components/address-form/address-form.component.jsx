@@ -64,7 +64,7 @@ const AddressForm = ({ name, title, onSetAddress, onSetIsValid }) => {
         const validationTest = validator.validate(address);
         setValidation(validationTest);
         onSetIsValid(name, validationTest.isValid);
-    }, [address, onSetIsValid]);
+    }, [address]);
 
     const getValidation = field => {
         return (validation[field].isInvalid && showErrors[field]);

@@ -20,6 +20,10 @@ export const styles = makeStyles(theme => ({
     },
     mb2: {
         marginBottom: theme.spacing(2)
-    }
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
 
 }));

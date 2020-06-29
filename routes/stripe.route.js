@@ -10,7 +10,9 @@ module.exports = router;
 const createCharge = async (req, res) => {
     const { id, products } = req.body;
 
-    const productList = await productController.getByIdMany(products);
+    const productIds = products.map(product => { return product.id });
+
+    const productList = await productController.getByIdMany(productIds);
     let total = 0;
 
     productList.forEach(product => {

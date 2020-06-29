@@ -7,13 +7,17 @@ import { cartAction } from '../../redux/cart';
 import { orderService } from '../../services/order.service';
 import { stripeService } from '../../services/stripe.service';
 
-import { Paper, List, ListItem, Typography, Button, Grid } from '@material-ui/core';
-import PaymentConfirmationModal from '../../components/payment-confirmation-modal/payment-confirmation-modal.component';
+import { Paper, List, ListItem, Typography, Button, Grid, Backdrop, CircularProgress, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import AddressForm from '../../components/address-form/address-form.component';
 import DeliveryOptionSelector from '../../components/delivery-option-selector/delivery-option-selector.component';
 import CheckoutProductItem from '../../components/checkout-page/checkout-product-item.component';
 
 import { styles } from './checkout.styles';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const cardElementOptions = {
     style: {
@@ -100,34 +104,36 @@ const CheckoutPage = ({ user, cart }) => {
 
                 const data = await stripeService.createCharge(id, products);
                 setResponse(data);
+                console.log(data);
+                setShowModal(false);
             }
         }
 
         createPayment();
 
-        const createOrder = async () => {
-            const products = cart.products.map(product => (
-                {
-                    productId: product._id,
-                    name: product.name,
-                    amount: product.amount,
-                    price: product.price
-                }
-            ));
+        // const createOrder = async () => {
+        //     const products = cart.products.map(product => (
+        //         {
+        //             productId: product._id,
+        //             name: product.name,
+        //             amount: product.amount,
+        //             price: product.price
+        //         }
+        //     ));
 
-            const order = {
-                customerId: user.currentUser._id,
-                products,
-                deliveryOption: selectedOption._id,
-                shippingAddress,
-                billingAddress,
-                totalPrice: orderInfo.total
-            }
+        //     const order = {
+        //         customerId: user.currentUser._id,
+        //         products,
+        //         deliveryOption: selectedOption._id,
+        //         shippingAddress,
+        //         billingAddress,
+        //         totalPrice: orderInfo.total
+        //     }
 
-            await orderService.create(order);
-        }
+        //     await orderService.create(order);
+        // }
 
-        createOrder();
+        // createOrder();
     }
 
     const endPayment = () => {
@@ -144,6 +150,10 @@ const CheckoutPage = ({ user, cart }) => {
 
     const areFormsValid = () => {
         return validations.shippingAddress && validations.billingAddress;
+    }
+
+    const ResponseElement = ({ response }) => {
+
     }
 
     return (
@@ -196,63 +206,17 @@ const CheckoutPage = ({ user, cart }) => {
                             <CardElement options={cardElementOptions} />
 
                             <Button disabled={!stripe && areFormsValid()} classes={{ root: classes.mt2 }} variant="contained" color="primary" onClick={() => onCheckout()} >Confirm Purchase</Button>
-                            <PaymentConfirmationModal show={showModal} response={response} onClose={endPayment} />
+                            <Backdrop className={classes.backdrop} open={showModal && response === null}>
+                                <CircularProgress color="primary" />
+                            </Backdrop>
+                            {response && <Snackbar open={response !== null} autoHideDuration={1500} onClose={() => endPayment()}>
+                                <Alert onClose={() => endPayment()} severity={response.code == 0 ? 'success' : 'error'}>{response.message}</Alert>
+                            </Snackbar>}
                         </div>
                     </Paper>
                 </Grid>
             </Grid>
         </div>
-        // <div className={classes.main}>
-        //     <Paper classes={{ root: classes.productsView }} elevation={3}>
-        //         <List>
-        //             {cart.products.map(product => (
-        //                 <ListItem key={product._id}>
-        //                     <CheckoutProductItem product={product} />
-        //                 </ListItem>
-        //             ))}
-        //         </List>
-        //     </Paper>
-
-        //     <div className={classes.form}>
-        //         <AddressForm name="shippingAddress" title="Shipping Address" onSetAddress={setShippingAddress} onSetIsValid={onValidateField} />
-        //     </div>
-
-        //     <div className={classes.form}>
-        //         <DeliveryOptionSelector selectedOption={selectedOption} setSelectedOption={onSetSelectedOption} />
-        //     </div>
-
-        //     <div className={classes.form}>
-        //         <AddressForm name="billingAddress" title="Billing Address" onSetAddress={setBillingAddress} onSetIsValid={onValidateField} />
-        //     </div>
-
-        //     <div className={classes.form}>
-        //         <Paper elevation={3}>
-        //             <div className={classes.p2}>
-        //                 <div>
-        //                     <Typography className={classes.totalsLabel} variant="caption">Price</Typography>
-        //                     <Typography variant="caption">${(orderInfo.price / 100).toFixed(2)}</Typography>
-        //                 </div>
-        //                 <div>
-        //                     <Typography className={classes.totalsLabel} variant="caption">{orderInfo.deliveryType}</Typography>
-        //                     <Typography variant="caption">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
-        //                 </div>
-        //                 <div>
-        //                     <Typography className={classes.totalsLabel} variant="caption">Tax</Typography>
-        //                     <Typography variant="caption">${(orderInfo.tax / 100).toFixed(2)}</Typography>
-        //                 </div>
-        //                 <div className={classes.mb2}>
-        //                     <Typography className={classes.totalsLabel} variant="caption">Total</Typography>
-        //                     <Typography variant="caption">${(orderInfo.total / 100).toFixed(2)}</Typography>
-        //                 </div>
-
-        //                 <CardElement options={cardElementOptions} />
-
-        //                 <Button disabled={!stripe && areFormsValid()} classes={{ root: classes.mt2 }} variant="contained" color="primary" onClick={() => onCheckout()} >Confirm Purchase</Button>
-        //                 <PaymentConfirmationModal show={showModal} response={response} onClose={endPayment} />
-        //             </div>
-        //         </Paper>
-        //     </div>
-        // </div>
     )
 }
 
