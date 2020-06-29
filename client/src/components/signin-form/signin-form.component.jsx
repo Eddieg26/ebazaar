@@ -14,7 +14,6 @@ import { ReactComponent as BrandLogo } from '../../assets/default-monochrome.svg
 const SignInForm = () => {
     const [info, setInfo] = useState({ email: '', password: '' });
     const [showErrors, setShowErrors] = useState({ email: false, password: false, result: false });
-
     let dispatch = useDispatch();
     let history = useHistory();
     let validator = new FormValidator([

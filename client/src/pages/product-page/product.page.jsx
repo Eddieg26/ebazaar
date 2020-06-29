@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 
 import { cartAction } from '../../redux/cart';
 
-import { Typography, Select, FormControl, InputLabel, MenuItem, Button } from '@material-ui/core';
+import { Typography, Select, FormControl, InputLabel, MenuItem, Button, Grid } from '@material-ui/core';
 
 import { styles } from './product.styles';
 
@@ -18,14 +18,27 @@ const ProductPage = ({ currentProduct }) => {
         dispatch(cartAction.addToCart(product));
     }
 
+    const getMenuItems = (start, amount) => {
+        let menuItems = [];
+        let count = start;
+        while (count < amount + start) {
+            menuItems.push(<MenuItem key={count} value={count}>{count}</MenuItem>);
+            ++count;
+        }
+
+        return menuItems;
+    }
+
     return (
         <div>
-            <div className={classes.main}>
-                <img className={classes.productImage} src="..\assets\product-images\apple-audio-01.jpg" alt="" />
-                <div className={classes.productInfo}>
+            <Grid container direction="row" alignItems="center" spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <img className={classes.productImage} src={`assets/product-images/${currentProduct.gallaryUrl}`} alt="" />
+                </Grid>
+                <Grid item xs={12} sm={8}>
                     <Typography variant="h5">{currentProduct.name}</Typography>
                     <Typography variant="subtitle1">${(currentProduct.price / 100).toFixed(2)}</Typography>
-                    <Typography className={classes.productDescription} variant="body2">{currentProduct.description}</Typography>
+                    <Typography variant="body2">{currentProduct.description}</Typography>
                     <FormControl margin="dense" style={{ marginRight: "16px" }} variant="outlined">
                         <InputLabel id="amount-select-label">Qty</InputLabel>
                         <Select
@@ -34,21 +47,12 @@ const ProductPage = ({ currentProduct }) => {
                             value={amount}
                             onChange={event => setAmount(event.target.value)}
                         >
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={6}>6</MenuItem>
-                            <MenuItem value={7}>7</MenuItem>
-                            <MenuItem value={8}>8</MenuItem>
-                            <MenuItem value={9}>9</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
+                            {getMenuItems(1, 10).map(menuItem => { return menuItem })}
                         </Select>
                     </FormControl>
                     <Button variant="contained" color="primary" onClick={() => onAddToCart()}>Add to cart</Button>
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         </div>
     )
 }

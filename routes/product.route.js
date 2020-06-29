@@ -12,7 +12,7 @@ const getById = async (req, res) => {
 }
 
 const getByIdMany = async (req, res) => {
-    const productIds = JSON.parse(decodeURIComponent(req.params.productIds));
+    const productIds = JSON.parse(req.params.productIds);
     const products = await productController.getByIdMany(productIds);
     return res.json(products);
 }

@@ -4,12 +4,15 @@ export const styles = makeStyles(theme => ({
     main: {
         display: "flex",
         justifyContent: "center",
-        marginTop: "32px"
+        marginTop: "32px",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column"
+        },
     },
     productImage: {
-        width: "35%",
-        height: "auto",
-        objectFit: "cover"
+        objectFit: "cover",
+        width: "100%",
+        height: "100%"
     },
     productInfo: {
         marginLeft: "16px",

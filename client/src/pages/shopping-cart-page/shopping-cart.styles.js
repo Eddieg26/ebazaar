@@ -2,9 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const styles = makeStyles(theme => ({
     main: {
-        justifyContent: "space-evenly",
-        display: "flex",
-        marginTop: "40px"
+        marginTop: "32px"
     },
     altMain: {
         justifyContent: "space-evenly",

@@ -10,7 +10,7 @@ export const styles = makeStyles(theme => ({
     },
     productImage: {
         objectFit: "cover",
-        width: "100%"
+        width: "100%",
     },
     productPrice: {
         backgroundColor: theme.palette.primary.main,

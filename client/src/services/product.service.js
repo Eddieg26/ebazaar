@@ -10,7 +10,7 @@ export const productService = {
     },
 
     getByIdMany: async function (productIds) {
-        const productIdsParam = encodeURIComponent(JSON.stringify(productIds));
+        const productIdsParam = JSON.stringify(productIds);
         const url = `${getBaseUrl()}/product/many/${productIdsParam}`;
 
         const response = await fetch(url);

@@ -9,13 +9,6 @@ export const styles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2)
     },
-    productsView: {
-        width: "50%"
-    },
-    form: {
-        width: "50%",
-        marginTop: theme.spacing(2)
-    },
     p2: {
         padding: theme.spacing(2)
     },

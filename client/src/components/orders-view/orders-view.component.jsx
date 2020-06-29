@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 
 import { orderAction } from '../../redux/order';
 
-import { Paper, Divider, Typography, Box, SvgIcon } from '@material-ui/core';
+import { Paper, Divider, Typography, Box, SvgIcon, Grid } from '@material-ui/core';
 import { Receipt } from '@material-ui/icons';
 import { styles } from './orders-view.styles';
 
-const OrdersView = ({ orders }) => {
+const OrdersView = ({ orders, products }) => {
     const classes = styles();
     let dispatch = useDispatch();
 
@@ -16,20 +16,25 @@ const OrdersView = ({ orders }) => {
         dispatch(orderAction.setCurrentOrder(order));
     }
 
+    const getProductImage = product => {
+        const _product = products.find(p => p._id === product.productId);
+
+        return _product ? _product.gallaryUrl : '';
+    }
+
     const ProductView = ({ product }) => {
         return (
             <div className={classes.productView}>
-                <div>
-                    <img className={classes.productViewImage} src="assets\product-images\apple-audio-01.jpg" alt="" />
+                <div style={{ marginLeft: "16px" }}>
+                    <img className={classes.productViewImage} src={`assets/product-images/${getProductImage(product)}`} alt="" />
                     <Typography style={{ verticalAlign: "top" }} component="span" variant="subtitle2">
                         <Box display="inline" fontWeight="fontWeightBold" m={1}>{product.name}</Box>
                     </Typography>
                 </div>
-                <div>
-                    <Typography variant="body2">${product.price.toFixed(2)}</Typography>
+                <div style={{ marginRight: "16px" }}>
+                    <Typography variant="body2">${(product.price / 100).toFixed(2)}</Typography>
                     <Typography variant="body2">Qty: {product.amount}</Typography>
                 </div>
-
             </div>
         )
     }
@@ -42,18 +47,21 @@ const OrdersView = ({ orders }) => {
 
     const OrderDetailsElement = ({ orderId, date, total, status }) => {
         return (
-            <div style={{ width: "30%" }}>
-                <Typography variant="caption">Order placed:</Typography>
-                <Typography component="div">
-                    <Box fontWeight="fontWeightLight" m={1}>{date}</Box>
-                </Typography>
-                <Typography variant="caption">Total:</Typography>
-                <Typography component="div">
-                    <Box fontWeight="fontWeightLight" m={1}>${total}</Box>
-                </Typography>
-                <div onClick={() => setCurrentOrder(orderId)}>
-                    <SvgIcon component={Receipt} color="primary" />
-                    <Typography style={{ verticalAlign: "top" }} href="/order" variant="body2" display="inline" component="a">View order</Typography>
+            <div>
+                <div className={classes.orderDetails}>
+                    <div style={{ margin: "16px" }}>
+                        <Typography display="inline" variant="caption" component="span">Order placed:</Typography>
+                        <Typography display="inline" variant="caption" component="span">
+                            <Box m={1} fontWeight="fontWeightLight">{date}</Box>
+                        </Typography>
+                    </div>
+
+                    <div style={{ margin: "16px" }}>
+                        <Typography display="inline" variant="caption" component="span">Total: </Typography>
+                        <Typography display="inline" variant="caption" component="span">
+                            <Box display="inline" fontWeight="fontWeightLight">${total}</Box>
+                        </Typography>
+                    </div>
                 </div>
             </div>
         )
@@ -61,22 +69,37 @@ const OrdersView = ({ orders }) => {
 
     const OrderElement = ({ order }) => {
         return (
-            <Paper className={classes.orderOuter} elevation={3}>
-                <div className={classes.orderInner}>
-                    <OrderDetailsElement orderId={order._id} date={getDateString(order.createdAt)} total={order.totalPrice.toFixed(2)} status="" />
-                    <Divider orientation="vertical" flexItem />
-                    <ProductView product={order.products[0]} />
-                </div>
+            <Paper elevation={3}>
+                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+                    <Grid item xs={12} sm={4}>
+                        <OrderDetailsElement orderId={order._id} date={getDateString(order.createdAt)} total={(order.totalPrice / 100).toFixed(2)} status="" />
+                    </Grid>
+                    <Divider orientation="middle" flexItem />
+                    <Grid item xs={12} sm={8}>
+                        <ProductView product={order.products[0]} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Divider />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <div style={{ margin: "16px" }} onClick={() => setCurrentOrder(order._id)}>
+                            <SvgIcon component={Receipt} color="primary" />
+                            <Typography style={{ verticalAlign: "top" }} href="/order" variant="body2" display="inline" component="a">View order</Typography>
+                        </div>
+                    </Grid>
+                </Grid>
             </Paper>
         )
     }
 
     return (
-        <div className={classes.main}>
+        <Grid container direction="row" justify="center" alignItems="flex-start">
             {orders.map(order => (
-                <OrderElement order={order} />
+                <Grid item xs={12} sm={12} md={8}>
+                    <OrderElement order={order} />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     )
 }
 

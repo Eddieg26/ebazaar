@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { orderService } from '../../services/order.service';
+import { productService } from '../../services/product.service';
 
 import { Typography, Box } from '@material-ui/core';
-
 import OrdersView from '../../components/orders-view/orders-view.component';
 
 import { styles } from './order-history.styles';
 
 const OrderHistoryPage = ({ user }) => {
     const [orders, setOrders] = useState([]);
+    const [products, setProducts] = useState([]);
     const classes = styles();
 
     let history = useHistory();
@@ -20,7 +21,14 @@ const OrderHistoryPage = ({ user }) => {
         if (user.currentUser && user.isLoggedIn) {
             const fetchOrders = async (customerId) => {
                 const orders = await orderService.getByCustomer(customerId);
+                const productIds = orders.reduce((prevValue, currentValue) => {
+                    return [...prevValue, ...currentValue.products.map(product => { return product.productId })];
+                }, []);
+
+                const products = await productService.getByIdMany(productIds);
+
                 setOrders(orders);
+                setProducts(products);
             }
 
             const customerId = user.currentUser._id;
@@ -38,7 +46,7 @@ const OrderHistoryPage = ({ user }) => {
                     <Box m={2}>Order history</Box>
                 </Typography>
             </div>
-            <OrdersView orders={orders} />
+            <OrdersView orders={orders} products={products} />
         </div>
     )
 }

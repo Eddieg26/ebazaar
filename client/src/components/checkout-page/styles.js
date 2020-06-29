@@ -14,7 +14,7 @@ export const styles = makeStyles(theme => ({
     },
     productImage: {
         objectFit: "cover",
-        marginRight: "32px",
+        marginRight: "16px",
         width: "75px",
         height: "75px"
     }

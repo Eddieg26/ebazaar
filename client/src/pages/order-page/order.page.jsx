@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { deliveryOptionService } from '../../services/deliveryOption.service'
+import { productService } from '../../services/product.service';
 
 import { Paper, List, ListItem, ListItemText, Typography, Box } from '@material-ui/core';
 
 import { styles } from './order.styles';
 
-const ProductElement = ({ product, classes }) => {
+const ProductElement = ({ product, classes, imgUrl }) => {
     return (
         <ListItem key={product._id}>
             <div className={classes.productView}>
-                <img className={classes.productImage} src="assets\product-images\apple-audio-01.jpg" alt="" />
+                <img className={classes.productImage} src={imgUrl} alt="" />
                 <ListItemText primary={product.name} />
                 <div>
                     <ListItemText primary={`$${(product.price / 100).toFixed(2)}`} />
@@ -27,6 +28,7 @@ const OrderPage = ({ currentOrder }) => {
     const [deliveryOption, setDeliveryOption] = useState(null);
     const [subTotal, setSubTotal] = useState(0);
     const [tax, setTax] = useState(0);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         if (!currentOrder) {
@@ -39,7 +41,14 @@ const OrderPage = ({ currentOrder }) => {
             setDeliveryOption(option);
         }
 
+        const fetchProducts = async (order) => {
+            const proudctIds = order.products.map(product => { return product.productId });
+            const products = await productService.getByIdMany(proudctIds);
+            setProducts(products);
+        }
+
         fetchDeliveryOption(currentOrder.deliveryOption);
+        fetchProducts(currentOrder);
 
     }, [currentOrder]);
 
@@ -65,6 +74,13 @@ const OrderPage = ({ currentOrder }) => {
         return new Date(date).toLocaleDateString('en-US', options);
     }
 
+    const getProductImage = product => {
+        const _product = products.find(p => p._id === product.productId);
+
+        console.log(_product);
+
+        return _product ? _product.gallaryUrl : '';
+    }
     return (
         <div className={classes.main}>
             <Paper classes={{ root: classes.productsView }} elevation={2}>
@@ -73,7 +89,7 @@ const OrderPage = ({ currentOrder }) => {
                 </Typography>
 
                 <List className={classes.list} dense>
-                    {currentOrder && currentOrder.products.map(product => (<ProductElement product={product} classes={classes} />))}
+                    {currentOrder && currentOrder.products.map(product => (<ProductElement product={product} classes={classes} imgUrl={`assets/product-images/${getProductImage(product)}`} />))}
                 </List>
             </Paper>
 
@@ -115,19 +131,19 @@ const OrderPage = ({ currentOrder }) => {
                 <div className={classes.totalsView}>
                     <div>
                         <span>Subtotal:</span>
-                        <span className={classes.floatRight}>${subTotal.toFixed(2)}</span>
+                        <span className={classes.floatRight}>${(subTotal / 100).toFixed(2)}</span>
                     </div>
                     <div>
                         <span>Tax:</span>
-                        <span className={classes.floatRight}>${tax.toFixed(2)}</span>
+                        <span className={classes.floatRight}>${(tax / 100).toFixed(2)}</span>
                     </div>
                     {deliveryOption && <div>
                         <span>Shipping:</span>
-                        <span className={classes.floatRight}>${deliveryOption.price.toFixed(2)}</span>
+                        <span className={classes.floatRight}>${(deliveryOption.price / 100).toFixed(2)}</span>
                     </div>}
                     <div>
                         <span>Total:</span>
-                        <span className={classes.floatRight}>${currentOrder.totalPrice.toFixed(2)}</span>
+                        <span className={classes.floatRight}>${(currentOrder.totalPrice / 100).toFixed(2)}</span>
                     </div>
                 </div>
 

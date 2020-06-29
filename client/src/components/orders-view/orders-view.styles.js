@@ -11,7 +11,8 @@ export const styles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "space-between",
         width: "100%",
-        padding: "24px"
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2)
     },
     productViewImage: {
         objectFit: "cover",
@@ -19,12 +20,23 @@ export const styles = makeStyles(theme => ({
         height: "96px"
     },
     orderOuter: {
-        width: "60%",
+        width: "80%",
         marginBottom: theme.spacing(2)
     },
     orderInner: {
         display: "flex",
         justifyContent: "flex-start",
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column"
+        },
+    },
+    orderDetails: {
+        display: "flex",
+        flexDirection: "column",
+        [theme.breakpoints.down('sm')]: {
+           flexDirection: "row"
+        },
+        justifyContent: "space-between"
     }
 }));

@@ -11,7 +11,7 @@ const CheckoutProductItem = ({ product }) => {
         <div className={"clearFix", classes.main}>
             <div className={classes.product}>
                 <div className={classes.productImageView}>
-                    <img className={classes.productImage} src="assets\product-images\apple-audio-01.jpg" alt="" />
+                    <img className={classes.productImage} src={`assets/product-images/${product.gallaryUrl}`} alt="" />
                     <div>
                         <Typography variant="subtitle2">{product.name}</Typography>
                         <Typography variant="caption">Quantity: {product.amount}</Typography>

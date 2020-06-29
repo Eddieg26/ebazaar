@@ -7,7 +7,7 @@ import { cartAction } from '../../redux/cart';
 import { orderService } from '../../services/order.service';
 import { stripeService } from '../../services/stripe.service';
 
-import { Paper, List, ListItem, Typography, Button } from '@material-ui/core';
+import { Paper, List, ListItem, Typography, Button, Grid } from '@material-ui/core';
 import PaymentConfirmationModal from '../../components/payment-confirmation-modal/payment-confirmation-modal.component';
 import AddressForm from '../../components/address-form/address-form.component';
 import DeliveryOptionSelector from '../../components/delivery-option-selector/delivery-option-selector.component';
@@ -147,57 +147,112 @@ const CheckoutPage = ({ user, cart }) => {
     }
 
     return (
-        <div className={classes.main}>
-            <Paper classes={{ root: classes.productsView }} elevation={3}>
-                <List>
-                    {cart.products.map(product => (
-                        <ListItem key={product._id}>
-                            <CheckoutProductItem product={product} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Paper>
+        <div style={{ marginTop: "32px" }}>
+            <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+                <Grid item xs={12} md={8}>
+                    <Paper elevation={3}>
+                        <List>
+                            {cart.products.map(product => (
+                                <ListItem key={product._id}>
+                                    <CheckoutProductItem product={product} />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Paper>
+                </Grid>
 
-            <div className={classes.form}>
-                <AddressForm name="shippingAddress" title="Shipping Address" onSetAddress={setShippingAddress} onSetIsValid={onValidateField} />
-            </div>
+                <Grid item xs={12} md={8}>
+                    <AddressForm name="shippingAddress" title="Shipping Address" onSetAddress={setShippingAddress} onSetIsValid={onValidateField} />
+                </Grid>
 
-            <div className={classes.form}>
-                <DeliveryOptionSelector selectedOption={selectedOption} setSelectedOption={onSetSelectedOption} />
-            </div>
+                <Grid item xs={12} md={8}>
+                    <DeliveryOptionSelector selectedOption={selectedOption} setSelectedOption={onSetSelectedOption} />
+                </Grid>
 
-            <div className={classes.form}>
-                <AddressForm name="billingAddress" title="Billing Address" onSetAddress={setBillingAddress} onSetIsValid={onValidateField} />
-            </div>
+                <Grid item xs={12} md={8}>
+                    <AddressForm name="billingAddress" title="Billing Address" onSetAddress={setBillingAddress} onSetIsValid={onValidateField} />
+                </Grid>
 
-            <div className={classes.form}>
-                <Paper elevation={3}>
-                    <div className={classes.p2}>
-                        <div>
-                            <Typography className={classes.totalsLabel} variant="caption">Price</Typography>
-                            <Typography variant="caption">${(orderInfo.price / 100).toFixed(2)}</Typography>
+                <Grid item xs={12} md={8}>
+                    <Paper elevation={3}>
+                        <div className={classes.p2}>
+                            <div>
+                                <Typography className={classes.totalsLabel} variant="caption">Price</Typography>
+                                <Typography variant="caption">${(orderInfo.price / 100).toFixed(2)}</Typography>
+                            </div>
+                            <div>
+                                <Typography className={classes.totalsLabel} variant="caption">{orderInfo.deliveryType}</Typography>
+                                <Typography variant="caption">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
+                            </div>
+                            <div>
+                                <Typography className={classes.totalsLabel} variant="caption">Tax</Typography>
+                                <Typography variant="caption">${(orderInfo.tax / 100).toFixed(2)}</Typography>
+                            </div>
+                            <div className={classes.mb2}>
+                                <Typography className={classes.totalsLabel} variant="caption">Total</Typography>
+                                <Typography variant="caption">${(orderInfo.total / 100).toFixed(2)}</Typography>
+                            </div>
+
+                            <CardElement options={cardElementOptions} />
+
+                            <Button disabled={!stripe && areFormsValid()} classes={{ root: classes.mt2 }} variant="contained" color="primary" onClick={() => onCheckout()} >Confirm Purchase</Button>
+                            <PaymentConfirmationModal show={showModal} response={response} onClose={endPayment} />
                         </div>
-                        <div>
-                            <Typography className={classes.totalsLabel} variant="caption">{orderInfo.deliveryType}</Typography>
-                            <Typography variant="caption">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
-                        </div>
-                        <div>
-                            <Typography className={classes.totalsLabel} variant="caption">Tax</Typography>
-                            <Typography variant="caption">${(orderInfo.tax / 100).toFixed(2)}</Typography>
-                        </div>
-                        <div className={classes.mb2}>
-                            <Typography className={classes.totalsLabel} variant="caption">Total</Typography>
-                            <Typography variant="caption">${(orderInfo.total / 100).toFixed(2)}</Typography>
-                        </div>
-
-                        <CardElement options={cardElementOptions} />
-
-                        <Button disabled={!stripe && areFormsValid()} classes={{ root: classes.mt2 }} variant="contained" color="primary" onClick={() => onCheckout()} >Confirm Purchase</Button>
-                        <PaymentConfirmationModal show={showModal} response={response} onClose={endPayment} />
-                    </div>
-                </Paper>
-            </div>
+                    </Paper>
+                </Grid>
+            </Grid>
         </div>
+        // <div className={classes.main}>
+        //     <Paper classes={{ root: classes.productsView }} elevation={3}>
+        //         <List>
+        //             {cart.products.map(product => (
+        //                 <ListItem key={product._id}>
+        //                     <CheckoutProductItem product={product} />
+        //                 </ListItem>
+        //             ))}
+        //         </List>
+        //     </Paper>
+
+        //     <div className={classes.form}>
+        //         <AddressForm name="shippingAddress" title="Shipping Address" onSetAddress={setShippingAddress} onSetIsValid={onValidateField} />
+        //     </div>
+
+        //     <div className={classes.form}>
+        //         <DeliveryOptionSelector selectedOption={selectedOption} setSelectedOption={onSetSelectedOption} />
+        //     </div>
+
+        //     <div className={classes.form}>
+        //         <AddressForm name="billingAddress" title="Billing Address" onSetAddress={setBillingAddress} onSetIsValid={onValidateField} />
+        //     </div>
+
+        //     <div className={classes.form}>
+        //         <Paper elevation={3}>
+        //             <div className={classes.p2}>
+        //                 <div>
+        //                     <Typography className={classes.totalsLabel} variant="caption">Price</Typography>
+        //                     <Typography variant="caption">${(orderInfo.price / 100).toFixed(2)}</Typography>
+        //                 </div>
+        //                 <div>
+        //                     <Typography className={classes.totalsLabel} variant="caption">{orderInfo.deliveryType}</Typography>
+        //                     <Typography variant="caption">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
+        //                 </div>
+        //                 <div>
+        //                     <Typography className={classes.totalsLabel} variant="caption">Tax</Typography>
+        //                     <Typography variant="caption">${(orderInfo.tax / 100).toFixed(2)}</Typography>
+        //                 </div>
+        //                 <div className={classes.mb2}>
+        //                     <Typography className={classes.totalsLabel} variant="caption">Total</Typography>
+        //                     <Typography variant="caption">${(orderInfo.total / 100).toFixed(2)}</Typography>
+        //                 </div>
+
+        //                 <CardElement options={cardElementOptions} />
+
+        //                 <Button disabled={!stripe && areFormsValid()} classes={{ root: classes.mt2 }} variant="contained" color="primary" onClick={() => onCheckout()} >Confirm Purchase</Button>
+        //                 <PaymentConfirmationModal show={showModal} response={response} onClose={endPayment} />
+        //             </div>
+        //         </Paper>
+        //     </div>
+        // </div>
     )
 }
 

@@ -3,14 +3,8 @@ import { makeStyles } from '@material-ui/core';
 export const styles = makeStyles(theme => ({
     main: {
         display: "flex",
-        flexDirection: "row"
-    },
-    sidebar: {
-        width: "20%",
-        margin: "16px"
-    },
-    productsView: {
-        width: "80%",
+        flexDirection: "column",
+        justifyContent: "flex-start",
         margin: "16px"
     }
 }));

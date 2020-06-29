@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import CartItemsView from '../../components/cart-items-view/cart-items-view.component';
 import SubtotalCard from '../../components/subtotal-card/subtotal-card';
-import { Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
 import { styles } from './shopping-cart.styles';
 
@@ -20,16 +20,16 @@ const ShoppingCartPage = ({ cart }) => {
     }, [cart]);
 
     return (
-        <div>
+        <div className={classes.main}>
             {cart.products.length > 0 ?
-                <div className={classes.main}>
-                    <div style={{ width: "50%" }}>
+                <Grid container direction="row" spacing={3}>
+                    <Grid item xs={12} sm={12} md={8}>
                         <CartItemsView products={cart.products} />
-                    </div>
-                    <div style={{ width: "30%" }}>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={4}>
                         <SubtotalCard subtotal={subtotal} />
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
                 :
                 <div className={classes.altMain}>
                     <div className={classes.emptyCart}>Your cart is empty</div>

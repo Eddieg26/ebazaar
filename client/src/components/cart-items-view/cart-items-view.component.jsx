@@ -27,7 +27,7 @@ const CartItemsView = ({ products }) => {
 
     const onSelectProduct = product => {
         dispatch(productAction.setCurrentProduct(product));
-        history.push(`/product/${product.name}`);
+        history.push(`/product`);
     }
 
     return (

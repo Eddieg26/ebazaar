@@ -60,15 +60,11 @@ const AddressForm = ({ name, title, onSetAddress, onSetIsValid }) => {
         setShowErrors({ ...showErrors, [name]: true });
     }
 
-    const validate = () => {
+    useEffect(() => {
         const validationTest = validator.validate(address);
         setValidation(validationTest);
         onSetIsValid(name, validationTest.isValid);
-    }
-
-    useEffect(() => {
-        validate();
-    }, [address]);
+    }, [address, onSetIsValid]);
 
     const getValidation = field => {
         return (validation[field].isInvalid && showErrors[field]);

@@ -11,11 +11,9 @@ import { Pagination } from '@material-ui/lab';
 import ProductCard from '../product-card/product-card.component';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-    },
+    main: {
+        margin: "16px",
+    }
 }));
 
 const ProductsView = ({ filterOptions }) => {
@@ -46,10 +44,10 @@ const ProductsView = ({ filterOptions }) => {
 
     }, [products, currentPage])
 
- 
+
     const onSelectProduct = product => {
         dispatch(productAction.setCurrentProduct(product));
-        history.push(`/product/${product.name}`);
+        history.push(`/product`);
     }
 
     const onAddProductToCart = product => {
@@ -59,17 +57,17 @@ const ProductsView = ({ filterOptions }) => {
     const classes = useStyles();
 
     return (
-        <div>
-            <Grid container direction="row" alignItems="flex-start" spacing={3}>
+        <div className={classes.main}>
+            <Grid container direction="row" alignItems="center" spacing={3}>
                 {currentProducts.map(product => (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <ProductCard product={product} onSelect={onSelectProduct} onAddToCart={onAddProductToCart} />
                     </Grid>
                 ))}
+                <Grid item xs={12}>
+                    <Pagination count={Math.ceil(products.length / productsPerPage)} color="primary" page={currentPage} onChange={paginate} />
+                </Grid>
             </Grid>
-            <div className={classes.root}>
-                <Pagination count={Math.ceil(products.length / productsPerPage)} color="primary" page={currentPage} onChange={paginate} />
-            </div>
         </div>
     )
 }
