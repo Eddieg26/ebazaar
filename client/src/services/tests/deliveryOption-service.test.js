@@ -1,6 +1,6 @@
 import { deliveryOptionService } from '../deliveryOption.service';
 
-describe('Check if delivery option service is working as inteded', () => {
+describe('Check if delivery option service is working as intended', () => {
     
     test('Check if correct amount of delivery options are returned', async () => {
         expect.assertions(1);
