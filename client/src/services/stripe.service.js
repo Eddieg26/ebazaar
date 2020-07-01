@@ -1,12 +1,13 @@
-import { getBaseUrl, createRequest } from '../utils/utils';
+import { getBaseUrl } from '../utils/utils';
+import axios from 'axios';
 
 export const stripeService = {
     createCharge: async function (id, products) {
         const url = `${getBaseUrl()}/stripe/charge`;
 
-        const response = await fetch(url, createRequest('POST', { id, products }));
+        const response = await axios.post(url, { id, products });
 
-        return response.json();
+        return response.data;
 
     }
 }

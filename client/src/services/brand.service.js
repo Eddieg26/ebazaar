@@ -1,11 +1,14 @@
 import { getBaseUrl } from '../utils/utils';
+import axios from 'axios';
 
 export const brandService = {
     getAll: async function () {
         const url = `${getBaseUrl()}/brands`;
 
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        return response.json();
+        console.log(response);
+
+        return response.data;
     }
 }
