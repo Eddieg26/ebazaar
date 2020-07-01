@@ -17,9 +17,14 @@ const update = async (orderId, updatedInfo) => {
     return await Order.updateOne({ _id: orderId }, { ...updatedInfo });
 }
 
+const deleteOrder = async (orderId) => {
+    return Order.findByIdAndDelete(orderId);
+}
+
 module.exports = {
     getById,
     getByCustomer,
     create,
-    update
+    update,
+    deleteOrder
 }

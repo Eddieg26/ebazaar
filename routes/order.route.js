@@ -26,6 +26,17 @@ const update = async (req, res) => {
     return res.json(order);
 }
 
+const deleteOrder = async (req, res) => {
+    const orderId = req.params.orderId;
+    try {
+        const deleted = await orderController.deleteOrder(orderId);
+        return res.json(deleted);
+    } catch (error) {
+        return res.json(null);
+    }
+}
+
 router.route('/:customerId').get(asynchandler(getByCustomer));
 router.route('/create').post(asynchandler(create));
 router.route('/update/:orderId').patch(asynchandler(update));
+router.route('/delete/:orderId').delete(asynchandler(deleteOrder));

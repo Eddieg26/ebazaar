@@ -9,11 +9,9 @@ export const styles = makeStyles(theme => ({
         marginTop: "32px"
     },
     productsView: {
-        width: "60%",
         marginBottom: "16px"
     },
     shippingDetailsView: {
-        width: "60%",
         marginBottom: "16px"
     },
     shippingDetails: {
@@ -21,13 +19,9 @@ export const styles = makeStyles(theme => ({
         justifyContent: "space-evenly"
     },
     totalsView: {
-        float: "right",
         width: "260px",
         height: "100px",
         margin: "8px 16px"
-    },
-    formWidth: {
-        width: "60%"
     },
     list: {
         width: '100%'

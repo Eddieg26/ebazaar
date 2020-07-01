@@ -3,16 +3,15 @@ import { useDispatch } from 'react-redux';
 
 import { orderAction } from '../../redux/order';
 
-import { Paper, Divider, Typography, Box, SvgIcon, Grid } from '@material-ui/core';
-import { Receipt } from '@material-ui/icons';
+import { Paper, Divider, Typography, Box, SvgIcon, Grid, IconButton, Button } from '@material-ui/core';
+import { Receipt, Delete } from '@material-ui/icons';
 import { styles } from './orders-view.styles';
 
-const OrdersView = ({ orders, products }) => {
+const OrdersView = ({ orders, products, onDeleteOrder }) => {
     const classes = styles();
     let dispatch = useDispatch();
 
-    const setCurrentOrder = orderId => {
-        const order = orders.find(_order => _order._id === orderId);
+    const setCurrentOrder = order => {
         dispatch(orderAction.setCurrentOrder(order));
     }
 
@@ -81,11 +80,15 @@ const OrdersView = ({ orders, products }) => {
                     <Grid item xs={12}>
                         <Divider />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <div style={{ margin: "16px" }} onClick={() => setCurrentOrder(order._id)}>
-                            <SvgIcon component={Receipt} color="primary" />
-                            <Typography style={{ verticalAlign: "top" }} href="/order" variant="body2" display="inline" component="a">View order</Typography>
+                    <Grid item xs={12}>
+                        <div className={classes.footer}>
+                            <Button variant="text" color="primary" href="/order" startIcon={<Receipt />} onClick={() => setCurrentOrder(order)}>View order</Button>
+
+                            <IconButton component="span" onClick={() => onDeleteOrder(order)}>
+                                <Delete color="error" />
+                            </IconButton>
                         </div>
+
                     </Grid>
                 </Grid>
             </Paper>
@@ -93,7 +96,7 @@ const OrdersView = ({ orders, products }) => {
     }
 
     return (
-        <Grid container direction="row" justify="center" alignItems="flex-start">
+        <Grid container direction="row" justify="center" alignItems="flex-start" spacing={3}>
             {orders.map(order => (
                 <Grid item xs={12} sm={12} md={8}>
                     <OrderElement order={order} />

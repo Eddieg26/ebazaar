@@ -186,21 +186,24 @@ const CheckoutPage = ({ user, cart }) => {
                 <Grid item xs={12} md={8}>
                     <Paper elevation={3}>
                         <div className={classes.p2}>
-                            <div>
-                                <Typography className={classes.totalsLabel} variant="caption">Price</Typography>
-                                <Typography variant="caption">${(orderInfo.price / 100).toFixed(2)}</Typography>
-                            </div>
-                            <div>
-                                <Typography className={classes.totalsLabel} variant="caption">{orderInfo.deliveryType}</Typography>
-                                <Typography variant="caption">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
-                            </div>
-                            <div>
-                                <Typography className={classes.totalsLabel} variant="caption">Tax</Typography>
-                                <Typography variant="caption">${(orderInfo.tax / 100).toFixed(2)}</Typography>
-                            </div>
-                            <div className={classes.mb2}>
-                                <Typography className={classes.totalsLabel} variant="caption">Total</Typography>
-                                <Typography variant="caption">${(orderInfo.total / 100).toFixed(2)}</Typography>
+                            <div className={classes.totalsView}>
+                                <div>
+                                    <Typography className={classes.totalsLabel} variant="caption" display="inline">Price</Typography>
+                                    <Typography className={classes.floatRight} variant="caption" display="inline">${(orderInfo.price / 100).toFixed(2)}</Typography>
+                                </div>
+                                <div>
+                                    <Typography className={classes.totalsLabel} variant="caption" display="inline">{orderInfo.deliveryType}</Typography>
+                                    <Typography className={classes.floatRight} variant="caption" display="inline">${(orderInfo.deliveryPrice / 100).toFixed(2)}</Typography>
+                                </div>
+                                <div>
+                                    <Typography className={classes.totalsLabel} variant="caption" display="inline">Tax</Typography>
+                                    <Typography className={classes.floatRight} variant="caption" display="inline">${(orderInfo.tax / 100).toFixed(2)}</Typography>
+                                </div>
+                                <div className={classes.mb2}>
+                                    <Typography className={classes.totalsLabel} variant="caption" display="inline">Total</Typography>
+                                    <Typography className={classes.floatRight} variant="caption" display="inline">${(orderInfo.total / 100).toFixed(2)}</Typography>
+                                </div>
+                                <div className={classes.clearFloat} />
                             </div>
 
                             <CardElement options={cardElementOptions} />

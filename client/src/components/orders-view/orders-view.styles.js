@@ -35,8 +35,13 @@ export const styles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "column",
         [theme.breakpoints.down('sm')]: {
-           flexDirection: "row"
+            flexDirection: "row"
         },
+        justifyContent: "space-between"
+    },
+    footer: {
+        margin: theme.spacing(2),
+        display: "flex",
         justifyContent: "space-between"
     }
 }));

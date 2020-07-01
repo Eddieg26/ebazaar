@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { deliveryOptionService } from '../../services/deliveryOption.service'
 import { productService } from '../../services/product.service';
 
-import { Paper, List, ListItem, ListItemText, Typography, Box } from '@material-ui/core';
+import { Paper, List, ListItem, ListItemText, Typography, Box, Grid } from '@material-ui/core';
 
 import { styles } from './order.styles';
 
@@ -82,75 +82,81 @@ const OrderPage = ({ currentOrder }) => {
         return _product ? _product.gallaryUrl : '';
     }
     return (
-        <div className={classes.main}>
-            <Paper classes={{ root: classes.productsView }} elevation={2}>
-                <Typography variant="h5">
-                    <Box m={1}>Products</Box>
-                </Typography>
+        <Grid container direction="row" justify="center">
+            <Grid item xs={12} md={8}>
+                <Paper classes={{ root: classes.productsView }} elevation={2}>
+                    <Typography variant="h5">
+                        <Box m={1}>Products</Box>
+                    </Typography>
 
-                <List className={classes.list} dense>
-                    {currentOrder && currentOrder.products.map(product => (<ProductElement product={product} classes={classes} imgUrl={`assets/product-images/${getProductImage(product)}`} />))}
-                </List>
-            </Paper>
+                    <List className={classes.list} dense>
+                        {currentOrder && currentOrder.products.map(product => (<ProductElement product={product} classes={classes} imgUrl={`assets/product-images/${getProductImage(product)}`} />))}
+                    </List>
+                </Paper>
+            </Grid>
 
-            <Paper classes={{ root: classes.shippingDetailsView }}>
-                <Typography variant="h5">
-                    <Box m={1}>Shipping details</Box>
-                </Typography>
+            <Grid item xs={12} md={8}>
+                <Paper classes={{ root: classes.shippingDetailsView }}>
+                    <Typography variant="h5">
+                        <Box m={1}>Shipping details</Box>
+                    </Typography>
 
-                <div className={classes.shippingDetails}>
-                    <div className={classes.m1}>
-                        <Typography variant="subtitle2">Shipping address</Typography>
-                        <Typography variant="body2">{currentOrder.shippingAddress.name}</Typography>
-                        <Typography variant="body2">{currentOrder.shippingAddress.street}</Typography>
-                        <Typography variant="body2">{`${currentOrder.shippingAddress.city} ${currentOrder.shippingAddress.state}, ${currentOrder.shippingAddress.zipcode}`}</Typography>
+                    <div className={classes.shippingDetails}>
+                        <div className={classes.m1}>
+                            <Typography variant="subtitle2">Shipping address</Typography>
+                            <Typography variant="body2">{currentOrder.shippingAddress.name}</Typography>
+                            <Typography variant="body2">{currentOrder.shippingAddress.street}</Typography>
+                            <Typography variant="body2">{`${currentOrder.shippingAddress.city} ${currentOrder.shippingAddress.state}, ${currentOrder.shippingAddress.zipcode}`}</Typography>
+                        </div>
+
+                        <div className={classes.m1}>
+                            <Typography variant="subtitle2">Billing address</Typography>
+                            <Typography variant="body2">{currentOrder.billingAddress.name}</Typography>
+                            <Typography variant="body2">{currentOrder.billingAddress.street}</Typography>
+                            <Typography variant="body2">{`${currentOrder.billingAddress.city} ${currentOrder.billingAddress.state}, ${currentOrder.billingAddress.zipcode}`}</Typography>
+                        </div>
+                    </div>
+                </Paper>
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+                <Paper>
+                    <Typography variant="h5">
+                        <Box m={1}>Receipt</Box>
+                    </Typography>
+
+                    <Typography className={`${classes.mt1}, ${classes.ml2}`} variant="subtitle2">
+                        <Box>Order placed:</Box>
+                    </Typography>
+
+                    <Typography className={`${classes.ml2} ${classes.mb1}`} variant="h6">
+                        <Box fontWeight="fontWeightLight">{getDateString(currentOrder.createdAt)}</Box>
+                    </Typography>
+
+                    <div className={classes.totalsView}>
+                        <div>
+                            <Typography variant="caption" display="inline">Subtotal:</Typography>
+                            <Typography className={classes.floatRight} variant="caption" display="inline">${(subTotal / 100).toFixed(2)}</Typography>
+                        </div>
+                        <div>
+                            <Typography variant="caption" display="inline">Tax:</Typography>
+                            <Typography className={classes.floatRight} variant="caption" display="inline">${(tax / 100).toFixed(2)}</Typography>
+                        </div>
+                        {deliveryOption && <div>
+                            <Typography variant="caption" display="inline">Shipping:</Typography>
+                            <Typography className={classes.floatRight} variant="caption" display="inline">${(deliveryOption.price / 100).toFixed(2)}</Typography>
+                        </div>}
+                        <div>
+                            <Typography variant="caption" display="inline">Total:</Typography>
+                            <Typography className={classes.floatRight} variant="caption" display="inline">${(currentOrder.totalPrice / 100).toFixed(2)}</Typography>
+                        </div>
                     </div>
 
-                    <div className={classes.m1}>
-                        <Typography variant="subtitle2">Billing address</Typography>
-                        <Typography variant="body2">{currentOrder.billingAddress.name}</Typography>
-                        <Typography variant="body2">{currentOrder.billingAddress.street}</Typography>
-                        <Typography variant="body2">{`${currentOrder.billingAddress.city} ${currentOrder.billingAddress.state}, ${currentOrder.billingAddress.zipcode}`}</Typography>
-                    </div>
-                </div>
-            </Paper>
+                    <div className={classes.clearFloat} />
 
-            <Paper classes={{ root: classes.formWidth }}>
-                <Typography variant="h5">
-                    <Box m={1}>Receipt</Box>
-                </Typography>
-
-                <Typography className={`${classes.mt1}, ${classes.ml2}`} variant="subtitle2">
-                    <Box>Order placed:</Box>
-                </Typography>
-
-                <Typography className={`${classes.ml2} ${classes.mb1}`} variant="h6">
-                    <Box fontWeight="fontWeightLight">{getDateString(currentOrder.createdAt)}</Box>
-                </Typography>
-
-                <div className={classes.totalsView}>
-                    <div>
-                        <span>Subtotal:</span>
-                        <span className={classes.floatRight}>${(subTotal / 100).toFixed(2)}</span>
-                    </div>
-                    <div>
-                        <span>Tax:</span>
-                        <span className={classes.floatRight}>${(tax / 100).toFixed(2)}</span>
-                    </div>
-                    {deliveryOption && <div>
-                        <span>Shipping:</span>
-                        <span className={classes.floatRight}>${(deliveryOption.price / 100).toFixed(2)}</span>
-                    </div>}
-                    <div>
-                        <span>Total:</span>
-                        <span className={classes.floatRight}>${(currentOrder.totalPrice / 100).toFixed(2)}</span>
-                    </div>
-                </div>
-
-                <div className={classes.clearFloat} />
-
-            </Paper>
-        </div>
+                </Paper>
+            </Grid>
+        </Grid>
     )
 }
 

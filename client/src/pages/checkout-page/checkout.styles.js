@@ -25,5 +25,14 @@ export const styles = makeStyles(theme => ({
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
     },
+    totalsView: {
+        width: "256px"
+    },
+    floatRight: {
+        float: "right"
+    },
+    clearFloat: {
+        clear: "both"
+    }
 
 }));
