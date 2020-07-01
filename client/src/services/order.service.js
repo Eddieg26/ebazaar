@@ -1,4 +1,4 @@
-import { getBaseUrl, createRequest } from '../utils/utils';
+import { getBaseUrl } from '../utils/utils';
 import axios from 'axios';
 
 export const orderService = {
@@ -7,7 +7,7 @@ export const orderService = {
 
         const response = await axios.get(url);
 
-        return response.json();
+        return response.data;
     },
 
     create: async function (orderInfo) {
