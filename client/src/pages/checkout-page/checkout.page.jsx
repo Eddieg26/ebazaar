@@ -111,29 +111,29 @@ const CheckoutPage = ({ user, cart }) => {
 
         createPayment();
 
-        // const createOrder = async () => {
-        //     const products = cart.products.map(product => (
-        //         {
-        //             productId: product._id,
-        //             name: product.name,
-        //             amount: product.amount,
-        //             price: product.price
-        //         }
-        //     ));
+        const createOrder = async () => {
+            const products = cart.products.map(product => (
+                {
+                    productId: product._id,
+                    name: product.name,
+                    amount: product.amount,
+                    price: product.price
+                }
+            ));
 
-        //     const order = {
-        //         customerId: user.currentUser._id,
-        //         products,
-        //         deliveryOption: selectedOption._id,
-        //         shippingAddress,
-        //         billingAddress,
-        //         totalPrice: orderInfo.total
-        //     }
+            const order = {
+                customerId: user.currentUser._id,
+                products,
+                deliveryOption: selectedOption._id,
+                shippingAddress,
+                billingAddress,
+                totalPrice: orderInfo.total
+            }
 
-        //     await orderService.create(order);
-        // }
+            await orderService.create(order);
+        }
 
-        // createOrder();
+        createOrder();
     }
 
     const endPayment = () => {
@@ -150,10 +150,6 @@ const CheckoutPage = ({ user, cart }) => {
 
     const areFormsValid = () => {
         return validations.shippingAddress && validations.billingAddress;
-    }
-
-    const ResponseElement = ({ response }) => {
-
     }
 
     return (
@@ -213,7 +209,7 @@ const CheckoutPage = ({ user, cart }) => {
                                 <CircularProgress color="primary" />
                             </Backdrop>
                             {response && <Snackbar open={response !== null} autoHideDuration={1500} onClose={() => endPayment()}>
-                                <Alert onClose={() => endPayment()} severity={response.code == 0 ? 'success' : 'error'}>{response.message}</Alert>
+                                <Alert onClose={() => endPayment()} severity={response.code === 0 ? 'success' : 'error'}>{response.message}</Alert>
                             </Snackbar>}
                         </div>
                     </Paper>
