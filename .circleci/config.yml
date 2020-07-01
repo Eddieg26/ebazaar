@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install -g react-scripts
+            - run: npm install react-scripts
             - run: npm install
             - run: npm test
 workflows:
